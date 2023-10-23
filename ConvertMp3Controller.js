@@ -26,30 +26,30 @@ async function index(req, res) {
         }
 
         // Use RapidApi
-        const json = await fetchApi(videoID);
-        if (json.status === 'ok') {
-            res.writeHead(200, {
-                'Content-Type': 'text/event-stream',
-                'Cache-Control': 'no-cache',
-                Connection: 'keep-alive',
-            });
-            const data = {
-                result: 'success',
-                songTitle: json.title,
-                songThumnail: `https://img.youtube.com/vi/${encodeURIComponent(
-                    videoID
-                )}/mqdefault.jpg`,
-                songLink: json.link,
-            };
-            return writeServerSendEvent(res, JSON.stringify(data));
-        } else if (json.code === '403') {
-            const data = {
-                success: false,
-                errMessage:
-                    'Video ID or Youtube link not found, please try again.',
-            };
-            return writeServerSendEvent(res, sseId(), JSON.stringify(data));
-        }
+        // const json = await fetchApi(videoID);
+        // if (json.status === 'ok') {
+        //     res.writeHead(200, {
+        //         'Content-Type': 'text/event-stream',
+        //         'Cache-Control': 'no-cache',
+        //         Connection: 'keep-alive',
+        //     });
+        //     const data = {
+        //         result: 'success',
+        //         songTitle: json.title,
+        //         songThumnail: `https://img.youtube.com/vi/${encodeURIComponent(
+        //             videoID
+        //         )}/mqdefault.jpg`,
+        //         songLink: json.link,
+        //     };
+        //     return writeServerSendEvent(res, JSON.stringify(data));
+        // } else if (json.code === '403') {
+        //     const data = {
+        //         success: false,
+        //         errMessage:
+        //             'Video ID or Youtube link not found, please try again.',
+        //     };
+        //     return writeServerSendEvent(res, sseId(), JSON.stringify(data));
+        // }
 
         // Use youtube-mp3-downloader package
 
