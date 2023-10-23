@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 module.exports = async (videoID) => {
     const url = `${process.env.API_URL}?id=${encodeURIComponent(videoID)}`;
